@@ -15,6 +15,6 @@ def about_view(request, *args, **kwargs):
      my_context = {
          "my_text": "This is about Us",
          "my_number": 123,
-         "my_list": [123, 234, 456]
+         "my_list": [123, 234, 456, 312, 255, "Abc"]
      }
      return render(request, "about.html", my_context)
