@@ -1,43 +1,18 @@
-from django.shortcuts import render
+from django.urls import path
+from .views import (
+    product_create_view,
+    product_detail_view,
+    product_delete_view,
+    product_list_view,
+    product_update_view,
 
-from .forms import ProductForm, RawProductForm
-from .models import Product
+)
 
-# Create your views here.
-# def product_create_view(request):
-#     my_form = RawProductForm()
-
-#     if request.method=="POST":
-#         my_form=ProductForm(request.POST)
-
-#         if my_form.is_valid():
-#             print(my_form.cleaned_data)
-#             Product.objects.create(**my_form.cleaned_data)
-#         else:
-#             print(my_form.errors)
-
-#     context = {
-#         'form':my_form
-#     }
-#     return render(request,"products/product_create.html",context)
-
-
-def product_create_view(request):
-    form = ProductForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        form=ProductForm()
-
-    context = {
-        'form':form
-    }
-    return render(request,"products/product_create.html",context)
-
-
-def product_detail_view(request):
-
-    obj = Product.objects.get(id=1)
-    context = {
-        'object':obj
-    }
-    return render(request,"products/product_detail.html",context)
+app_name = 'products'
+urlpatterns = [
+    path('', product_list_view, name='product-list'),
+    path('create/', product_create_view, name='product-list'),
+    path('<int:id>/', product_detail_view, name='product-detail'),
+    path('<int:id>/update/', product_update_view, name='product-update'),
+    path('<int:id>/delete/', product_delete_view, name='product-delete'),
+]
