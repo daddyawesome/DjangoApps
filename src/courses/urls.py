@@ -1,18 +1,21 @@
 from django.urls import path
 from .views import (
-    #product_create_view,
-    #product_detail_view,
-    #product_delete_view,
-    #product_list_view,
-    #product_update_view,
-
+    CourseView,
+    CourseListView,
+    CourseCreateView,
+    CourseUpdateView,
+    CourseDeleteView
+    # my_fbv
 )
 
 app_name = 'courses'
 urlpatterns = [
-    #path('', product_list_view, name='product-list'),
-    #path('create/', product_create_view, name='product-list'),
-    #path('<int:id>/', product_detail_view, name='product-detail'),
-    #path('<int:id>/update/', product_update_view, name='product-update'),
-    #path('<int:id>/delete/', product_delete_view, name='product-delete'),
+    path('', CourseListView.as_view(), name='courses-list'),
+    # path('', my_fbv, name='courses-list'),
+
+
+    path('create/', CourseCreateView.as_view(), name='courses-create'),
+    path('<int:id>/', CourseView.as_view(), name='courses-detail'),
+    path('<int:id>/update/', CourseUpdateView.as_view(), name='courses-update'),
+    path('<int:id>/delete/', CourseDeleteView.as_view(), name='courses-delete'),
 ]
